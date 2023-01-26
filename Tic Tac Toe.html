@@ -7,7 +7,6 @@
   margin: 0 auto;
   border-collapse: collapse;
 }
-
 td {
   width: 50px;
   height: 50px;
@@ -15,11 +14,9 @@ td {
   font-size: 24px;
   border: 1px solid #ccc;
 }
-
 .winner {
   background-color: yellow;
 }
-
 #reset {
   display: block;
   margin: 20px auto;
@@ -34,7 +31,6 @@ td {
 #reset:hover {
   background-color: #3e8e41;
 }
-
     </style>
   </head>
   <body onload="init()">
@@ -66,50 +62,25 @@ td {
         currentPlayer = 'X';
         gameOver = false;
       }
-
-      // Function to reset the game
       function resetGame() {
         // Clear the game board
         for (let i = 1; i <= 9; i++) {
           document.getElementById(`cell-${i}`).textContent = '';
           document.getElementById(`cell-${i}`).classList.remove('winner');
         }
-        // Reset the game state
         init();
       }
-      //other functions
-
-
-
-
-
-      // Function to handle a player's move
       function handleMove(event) {
-        // Get the id of the clicked cell
         const cellId = event.target.id;
-
-        // Get the index of the cell in the board array
         const cellIndex = cellId.split('-')[1] - 1;
-
-        // Only allow a move if the game is not over and the cell is empty
         if (!gameOver && !board[cellIndex]) {
-          // Update the board array with the player's move
           board[cellIndex] = currentPlayer;
-
-          // Update the cell's text content
           event.target.textContent = currentPlayer;
-
-          // Check for a winner
           checkForWinner();
-
-          // Switch to the other player
           currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         }
       }
-
-      // Function to check for a winner
       function checkForWinner() {
-        // Winning combinations
         const winningCombinations = [
           [0, 1, 2],
           [3, 4, 5],
@@ -120,24 +91,16 @@ td {
           [0, 4, 8],
           [2, 4, 6]
         ];
-
-        // Check each winning combination
         for (let i = 0; i < winningCombinations.length; i++) {
           const [a, b, c] = winningCombinations[i];
           if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            // We have a winner!
             gameOver = true;
-
-            // Highlight the winning cells
             document.getElementById(`cell-${a + 1}`).classList.add('winner');
             document.getElementById(`cell-${b + 1}`).classList.add('winner');
             document.getElementById(`cell-${c + 1}`).classList.add('winner');
-
-            // Show a message
             alert(`Player ${board[a]} wins!`);
             break;
           } else if (!board.includes('')) {
-            // If there are no more empty cells and no winner, it's a tie
             gameOver = true;
             alert("It's a tie!");
 	    resetGame();
@@ -146,5 +109,4 @@ td {
       }
     </script>
   </body>
- 
 </html>
