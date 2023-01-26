@@ -102,8 +102,9 @@ td {
             break;
           } else if (!board.includes('')) {
             gameOver = true;
-            alert("It's a tie!");
-	    resetGame();
+            if (confirm("It's a tie! Do you want to play again?")) {
+        	resetGame();
+    	    }
           }
         }
       }
